@@ -6,31 +6,19 @@ import './App.css'
 function App() {
   return (
     <div>
-      <CardWrapper innercomponent={TextComponent} />
+      <CardWrapper>
+        Hi there
+        </CardWrapper>
     </div>
   );
 }
 
-function TextComponent() {
-  return (
-    <div>
-      Hi there
-    </div>
-  );
-}
 
-function CardWrapper({ innercomponent: InnerComponent }) {
+
+function CardWrapper({ children}) {
   return (
-    <div style={{
-      border: '2px solid #333',
-      borderRadius: '10px',
-      padding: '20px',
-      maxWidth: '300px',
-      margin: '20px auto',
-      boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
-      backgroundColor: '#f9f9f9'
-    }}>
-      <InnerComponent />
+    <div style={{     border: '2px solid #333 '   }}>
+      {children}
     </div>
   );
 }
