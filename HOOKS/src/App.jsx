@@ -1,33 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+// React doesn’t let you directly access the DOM normally. 
+// But with useRef, you can get a reference to an element.
+const btnRef=useRef()
+useEffect(()=>{
+  btnRef.style.background="red"
+})
+// The main reason we use useEffect here is that refs (like inputRef.current) are only available 
+// after the component has mounted and the DOM elements are rendered.
 
+// If you tried to run inputRef.current.focus() outside of useEffect, 
+// it would run during the render phase—before the DOM is attached—so inputRef.current 
+// would be null, and you'd get an error.
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+     <button ref={btnRef} >Hello there</button>
     </>
   )
 }
