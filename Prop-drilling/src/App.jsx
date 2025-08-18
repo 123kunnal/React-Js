@@ -1,36 +1,44 @@
 import { useContext, useState } from 'react'
-import reactLogo from './assets/react.svg'
 import { CountContext } from './components/context'
 import './App.css'
-//wrap anyone who wants to use the teleported value inside a provider
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-    <CountContext.Provider value={count}>
-      <Count data={count}/>
-    </CountContext.Provider>
-       </>
+    // You are wrapping Count with a Provider.
+    // Whatever you pass in value={ { count, setCount } } will be available to Count and all of its child components(like CountRenderer, Button, etc.), no matter how deeply nested they are.
+    < CountContext.Provider value = {{ count, setCount }}>
+  <Count />
+    </CountContext.Provider >
   )
 }
-function Count({data}){
-  return <div>
-    <CountRenderer/>
-    <Button data={count} setter={setCount}/>
-  </div>
-}
-function CountRenderer(){
-  const data=useContext(CountContext);
-  return <div>
-    {data}
-  </div>
-}
-function Button({data,setter}){
-  const data=useContext(CountContext)
-    return <div>
-      <button onClick={()=>{setter(data+1)}}>Inc</button>
-      <button onClick={()=>{setter(data-1)}}>Dec</button>
+
+function Count() {
+  console.log("RE-renderin");
+  return (
+    <div>
+      
+      
+      <CountRenderer />
+      <Button />
     </div>
+  )
 }
+
+function CountRenderer() {
+  const { count } = useContext(CountContext);
+  return <div>{count}</div>
+}
+
+function Button() {
+  const { count, setCount } = useContext(CountContext)
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>Inc</button>
+      <button onClick={() => setCount(count - 1)}>Dec</button>
+    </div>
+  )
+}
+
 export default App
