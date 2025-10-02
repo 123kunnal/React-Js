@@ -15,3 +15,14 @@ export const Messainatom=atom({
     key:"messainatom",
     default:0
 })
+//selector is derived from other atoms or selectors
+export const totalcount=selector({
+    key:"totalcount",
+    get:({get})=>{
+        const a=get(Networkatom);
+        const b=get(Jobatom);
+        const c=get(Messainatom);
+        const d=get(Notificationatom);
+        return a+b+c+d;
+    }
+})

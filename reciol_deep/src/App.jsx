@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { Networkatom,Notificationatom,Jobatom, Messainatom } from "./atoms";
+import { Networkatom,Notificationatom,Jobatom, Messainatom, totalcount } from "./atoms";
 import { useRecoilValue, RecoilRoot,useRecoilState } from "recoil"; // ✅ Import RecoilRoot
 
 function App() {
@@ -16,6 +16,7 @@ function Pick() {
   const NotificationCount = useRecoilValue(Notificationatom);
   const JobsnotificationCount = useRecoilValue(Jobatom);
   const [mesatomCount,setMe]=useRecoilState(Messainatom);
+  const TC=useRecoilValue(totalcount);
   return (
     <>
       <button>Home</button>
@@ -26,9 +27,10 @@ function Pick() {
       <button>Notifications ({NotificationCount>=100?"99+":NotificationCount})</button>
       <button>Messaging ({mesatomCount >= 100 ? "99+" : mesatomCount})</button>
 
-      <button onClick={()=>{
+      <button >ME {TC}</button>
+      {/* <button onClick={()=>{
         setMe(mesatomCount+1)
-      }}>ME</button>
+      }}>ME</button> */}
     </>
   );
 }
